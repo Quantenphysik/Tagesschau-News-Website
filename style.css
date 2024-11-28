@@ -1,0 +1,133 @@
+/*Color Palette*/
+:root {
+    /* CSS HEX */
+    --true-blue: #0466c8ff;
+    --sapphire: #0353a4ff;
+    --yale-blue: #023e7dff;
+    --oxford-blue: #002855ff;
+    --oxford-blue-2: #001845ff;
+    --oxford-blue-3: #001233ff;
+    --delft-blue: #33415cff;
+    --paynes-gray: #5c677dff;
+    --slate-gray: #7d8597ff;
+    --cool-gray: #979dacff;
+
+    /* CSS HSL */
+    --true-blue: hsla(210, 96%, 40%, 1);
+    --sapphire: hsla(210, 96%, 33%, 1);
+    --yale-blue: hsla(211, 97%, 25%, 1);
+    --oxford-blue: hsla(212, 100%, 17%, 1);
+    --oxford-blue-2: hsla(219, 100%, 14%, 1);
+    --oxford-blue-3: hsla(219, 100%, 10%, 1);
+    --delft-blue: hsla(220, 29%, 28%, 1);
+    --paynes-gray: hsla(220, 15%, 43%, 1);
+    --slate-gray: hsla(222, 11%, 54%, 1);
+    --cool-gray: hsla(223, 11%, 63%, 1);
+}
+
+/*General*/
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+.space-mono-bold {
+    font-family: "Space Mono", monospace;
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    font-family: "Space Mono", monospace;
+
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    Background-color: var(--oxford-blue);
+    overflow: hidden;
+}
+
+
+
+
+
+/*Navbar*/
+.header {
+    background-color: var(--delft-blue);
+    overflow: hidden;
+    text-align: center;
+}
+
+.header h1 {
+    color: white;
+    text-align: center;
+    font-size: 10vh;
+    margin-top:20px;
+    margin-bottom: 4px;
+}
+
+.header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.header nav ul li {
+    display: inline;
+}
+
+.header nav ul li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+.header nav ul li a:hover {
+    background-color: var(--slate-gray);
+    color: var(--delft-blue);
+}
+
+
+
+/*Articles*/
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.articles_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.articles_wrapper a {
+    text-decoration: none;
+}
+
+.article {
+    aspect-ratio: 16/9;
+    width: 35vw;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: all 0.25s;
+    border-radius: 4px;
+}
+.article:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}.article h2 {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    margin: 0;
+}

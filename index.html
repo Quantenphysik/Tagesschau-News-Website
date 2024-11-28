@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>News Aktuell</title>
+    <link rel="stylesheet" href="../web/style.css">
+</head>
+<body>
+
+<div class="header">
+    <h1 class="space-mono-bold">News Aktuell</h1>
+    <nav>
+        <ul>
+            <li><a href="#Inland" data-category="inland">Inland</a></li>
+            <li><a href="#Ausland" data-category="ausland">Ausland</a></li>
+            <li><a href="#Wirtschaft" data-category="wirtschaft">Wirtschaft</a></li>
+            <li><a href="#Sport" data-category="sport">Sport</a></li>
+            <li><a href="#Investigativ" data-category="investigativ">Investigativ</a></li>
+            <li><a href="#Wissen" data-category="wissen">Wissen</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="body">
+    <div class="articles_wrapper" id="articles_inland"></div>
+    <div class="articles_wrapper" id="articles_ausland" style="display:none;"></div>
+    <div class="articles_wrapper" id="articles_wirtschaft" style="display:none;"></div>
+    <div class="articles_wrapper" id="articles_sport" style="display:none;"></div>
+    <div class="articles_wrapper" id="articles_investigativ" style="display:none;"></div>
+    <div class="articles_wrapper" id="articles_wissen" style="display:none;"></div>
+</div>
+<div class="footer">
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const apiUrl = "https://www.tagesschau.de/api2u/news/?ressort=";
+        const categories = ['inland', 'ausland', 'wirtschaft', 'sport', 'investigativ', 'wissen'];
+        categories.forEach(category => {
+            console.log("Fetching articles with url", `${apiUrl}${category}`);
+            fetch(`${apiUrl}${category}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(`Data fetched for ${category}:`, data);
+                    if (!data.news) {
+                        console.error(`No news data for ${category}`);
+                        return;
+                    }
+                    const articlesDiv = document.getElementById(`articles_${category}`);
+                    const articles = data.news.filter(article => article.teaserImage).slice(0, 4);
+                    articles.forEach(article => {
+                        const articleDiv = document.createElement('div');
+                        articleDiv.classList.add('article');
+                        articleDiv.style.backgroundImage = article.teaserImage ? `url(${article.teaserImage.imageVariants['16x9-960']})` : '';
+                        articleDiv.innerHTML = `<h2>${article.title}</h2>`;
+
+                        const articleLink = document.createElement('a');
+                        articleLink.href = article.detailsweb;
+                        articleLink.target = "_blank";
+                        articleLink.appendChild(articleDiv);
+
+                        articlesDiv.appendChild(articleLink);
+                        console.log(`Article added for ${category}:`, article);
+                    });
+                })
+                .catch(error => console.error(`Error fetching articles for ${category}:`, error));
+        });
+
+        document.querySelectorAll('.header nav ul li a').forEach(tab => {
+            tab.addEventListener('click', (event) => {
+                event.preventDefault();
+                document.querySelectorAll('.articles_wrapper').forEach(wrapper => wrapper.style.display = 'none');
+                const category = tab.getAttribute('data-category');
+                document.getElementById(`articles_${category}`).style.display = 'flex';
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
